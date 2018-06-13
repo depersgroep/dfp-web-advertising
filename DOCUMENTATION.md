@@ -55,8 +55,8 @@ callbacks        | object       | Callback functions
 
 ````javascript
 var tag = {
-	'networkId': 7191,
-	'adUnit': 'target/target.site-%screenSize%/home'
+	networkId: 1111,
+        adUnit: 'example/example.site-%screenSize%/default'
 };
 ````
 
