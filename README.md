@@ -7,13 +7,13 @@ package.json
 
 ````javascript
 "dependencies": {
-  "web-advertising": "^4.0.0"
+  "dfp-web-advertising": "^4.0.0"
 }
 ````
 
 Or by using
 ````javascript
-npm install --save-dev web-advertising
+npm install --save-dev dfp-web-advertising
 ````
 
 > We use the principle of Semantic versioning - 3 `MAJOR`. 2 `MINOR`. 0 `PATCH`. As long as the major number doesn’t raise, it is not "breaking". As most of you know, we are a big supporter of the evergreen principle and we also expect every `MINOR` & `PATCH` update to happen automatically.
