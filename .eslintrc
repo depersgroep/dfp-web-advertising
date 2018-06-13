@@ -1,0 +1,13 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 5,
+        "sourceType": "script"
+    },
+    "extends": [
+        "./node_modules/eslint-config-persgroep/index.js"
+    ],
+    "globals": {},
+    "env": {
+        "browser": true
+    }
+}

@@ -1,0 +1,60 @@
+#!/bin/sh
+# Based on https://github.com/WouterSioen/pre-commit/blob/master/pre-commit
+# On Mac, don't forget to give the file executable rights "chmod +x .pre-commit"
+
+if [ -f ~/.bash_profile ]; then
+	source ~/.bash_profile
+fi
+
+PATH="/usr/local/bin:$PATH"
+WEBSRC="."
+
+# create empty errors array
+declare -a errors=()
+
+# Find eslint instance that is used by gulp-eslint. Gulp-eslint uses either a local or the application global instance when versions match
+if [ -d "$WEBSRC/node_modules/gulp-eslint/node_modules/eslint" ]; then
+	eslintLocation=$WEBSRC/node_modules/gulp-eslint/node_modules/eslint
+else
+	eslintLocation=$WEBSRC/node_modules/eslint
+fi
+
+jslinter=$eslintLocation/bin/eslint.js
+if [ ! -f "$jslinter" ]; then
+	echo 'WARNING: ESLint is not installed in this project'
+	echo 'Please execute:'
+	echo '	$ cd' "$WEBSRC"
+	echo '	$ npm install eslint --save-dev'
+	echo 'More info:'
+	echo '	http://eslint.org/'
+	exit 1
+fi
+
+# fetch all changed javascript files and validate them
+files=$(git diff --cached --name-only --diff-filter=ACMR | grep "$WEBSRC/src/*\.js$")
+if [ -n "$files" ]; then
+	echo
+	echo "Checking Javascript Files"
+	echo "------------------"
+
+	$jslinter $files --config $WEBSRC/.eslintrc --rule 'no-console: 2' --ignore-path $WEBSRC/.eslintignore
+	RESULT=$?
+
+	if [ $RESULT != 0 ]; then
+		errors=(${errors[@]} "pre-commit-eslint")
+	fi
+fi
+
+# if we have errors, exit with 1
+if [ -n "$errors" ]; then
+	echo
+	echo "Errors"
+	echo "------------------"
+
+	for error in "${errors[@]}"
+	do
+		echo "$error failed"
+	done
+
+	exit 1
+fi

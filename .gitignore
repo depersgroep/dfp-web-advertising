@@ -1,0 +1,8 @@
+node_modules
+.DS_Store
+.idea
+.vscode
+coverage
+out
+package-lock.json
+test/manual-test-page.html
