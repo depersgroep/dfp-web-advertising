@@ -14,13 +14,16 @@ node('java-1.8') {
 
     try {
 
-        stage('execute unit tests') {
+        stage('Install dependencies'){
+            sh 'npm i --verbose'
+        }
+
+        stage('Execute unit tests') {
             withCredentials([
                     string(credentialsId: 'BROWSERSTACK_KEY', variable: 'BROWSERSTACK_KEY'),
                     string(credentialsId: 'BROWSERSTACK_USR', variable: 'BROWSERSTACK_USR')
             ]) {
 
-                sh 'npm i'
                 sh 'npm run test-browserstack'
 
             }
