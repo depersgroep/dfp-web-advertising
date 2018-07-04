@@ -74,17 +74,17 @@ window.dfp = (function(tar, w, d, c) {
 					w.googletag.pubads().collapseEmptyDivs();
 				}
 
-				if (typeof opts.disableInitialLoad !== 'undefined' || opts.disableInitialLoad) {
+				if (opts.ppid && _isValidPpid(opts.ppid)) {
+					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
+				}
+
+				if (opts.disableInitialLoad) {
 					w.googletag.pubads().disableInitialLoad();
 					disableInitialLoad = true;
 				}
 
-				if (typeof opts.requestNonPersonalizedAds !== 'undefined' || opts.requestNonPersonalizedAds) {
+				if (opts.requestNonPersonalizedAds) {
 					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
-				}
-
-				if (typeof opts.ppid !== 'undefined' && _isValidPpid(opts.ppid)) {
-					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
 				}
 
 				w.googletag.pubads().setRequestNonPersonalizedAds(nonPersonalizedAds);
@@ -511,6 +511,8 @@ window.dfp = (function(tar, w, d, c) {
 		if (ppid.length < 32 || ppid.length > 150) {
 			throw new Error('No valid PPID! Make sure it\'s equal or between 32 and 150 characters');
 		}
+
+		return true;
 	}
 
 	/**
