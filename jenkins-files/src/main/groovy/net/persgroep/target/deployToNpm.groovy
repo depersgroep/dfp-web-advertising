@@ -32,7 +32,8 @@ node('java-1.8') {
         }
 
         stage('Push new version to GitHub'){
-            general.runGitCommand('git push origin ' + env.Branch)
+            sh 'git commit -am "Bumped to a new ' + env.VersionBump +' version"'
+            sh 'git push origin ' + env.Branch
         }
 
 
