@@ -32,7 +32,8 @@ node('java-1.8') {
         }
 
         stage('Push new version to GitHub'){
-            sh 'git push origin ' + env.Branch
+            general.runGitCommand('git push origin ' + env.Branch)
+            general.runGitCommand('git push origin --tags')
         }
 
 
@@ -47,7 +48,7 @@ node('java-1.8') {
     } finally {
 
         stage('Wipe workspace'){
-            //deleteDir()
+            deleteDir()
         }
 
     }

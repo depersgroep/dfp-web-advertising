@@ -18,5 +18,11 @@ def hipChatNotifyFailed() {
     )
 }
 
+def runGitCommand(String gitCommand) {
+    sshagent(['github-ssh']) {
+        sh '' + gitCommand
+    }
+}
+
 return this
 
