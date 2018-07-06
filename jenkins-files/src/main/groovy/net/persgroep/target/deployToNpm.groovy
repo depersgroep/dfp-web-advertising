@@ -48,7 +48,7 @@ node('java-1.8') {
     } finally {
 
         stage('Wipe workspace'){
-            deleteDir()
+            //deleteDir()
         }
 
     }
