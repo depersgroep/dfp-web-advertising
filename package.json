@@ -1,6 +1,6 @@
 {
   "name": "dfp-web-advertising",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "DFP web Library",
   "main": "gulpfile.js",
   "author": "Tar.get()",
