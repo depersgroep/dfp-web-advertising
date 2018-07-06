@@ -20,7 +20,7 @@ node('java-1.8') {
 
         stage('Bump version'){
             println("chosen semver type:" + env.VersionBump)
-            sh 'npm version ' + env.VersionBump + ' -f'
+            sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump +' version: %s"'
         }
 
         stage('Build script with new version number'){
@@ -32,7 +32,6 @@ node('java-1.8') {
         }
 
         stage('Push new version to GitHub'){
-            sh 'git commit -am "Bumped to a new ' + env.VersionBump +' version"'
             sh 'git push origin ' + env.Branch
         }
 
