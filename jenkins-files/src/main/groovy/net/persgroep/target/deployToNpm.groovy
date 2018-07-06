@@ -20,7 +20,7 @@ node('java-1.8') {
 
         stage('Bump version'){
             println("chosen semver type:" + env.VersionBump)
-            sh 'npm version ' + env.VersionBump + ' -f'
+            sh 'npm version ' + env.VersionBump
         }
 
         stage('Build script with new version number'){
