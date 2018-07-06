@@ -24,7 +24,7 @@ node('java-1.8') {
         }
 
         stage('Build script with new version number'){
-            //todo
+            sh 'npm run start'
         }
 
         stage('Push new version to NPM'){
