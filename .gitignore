@@ -4,5 +4,4 @@ node_modules
 .vscode
 coverage
 out
-package-lock.json
 test/manual-test-page.html
