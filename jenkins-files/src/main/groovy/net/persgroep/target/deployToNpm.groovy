@@ -24,7 +24,7 @@ node('java-1.8') {
         }
 
         stage('Build script with new version number'){
-            sh 'npm run start'
+            sh 'npm run jenkins-build'
         }
 
         stage('Push new version to NPM'){
