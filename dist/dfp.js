@@ -120,6 +120,10 @@ window.dfp = (function(tar, w, d, c) {
 					w.googletag.pubads().collapseEmptyDivs();
 				}
 
+				if (typeof opts.requestNonPersonalizedAds !== 'undefined') {
+					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
+				}
+
 				if (opts.ppid && _isValidPpid(opts.ppid)) {
 					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
 				}
@@ -127,10 +131,6 @@ window.dfp = (function(tar, w, d, c) {
 				if (opts.disableInitialLoad) {
 					w.googletag.pubads().disableInitialLoad();
 					disableInitialLoad = true;
-				}
-
-				if (opts.requestNonPersonalizedAds) {
-					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
 				}
 
 				w.googletag.pubads().setRequestNonPersonalizedAds(nonPersonalizedAds);

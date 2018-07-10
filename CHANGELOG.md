@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## [4.0.3] - 2018-07-09
+### Fixed
+- Targeted initialization
+
 ## [4.0.2] - 2018-07-04
 ### Fixed
 - Disableload initialization
