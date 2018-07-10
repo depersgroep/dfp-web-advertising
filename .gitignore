@@ -7,3 +7,4 @@ out
 test/manual-test-page.html
 junitResults/
 *.iml
+.npmrc
