@@ -1,5 +1,5 @@
 {
-  "name": "dfp-web-advertising",
+  "name": "@depersgroep/dfp-web-advertising",
   "version": "4.0.2",
   "description": "DFP web Library",
   "main": "gulpfile.js",

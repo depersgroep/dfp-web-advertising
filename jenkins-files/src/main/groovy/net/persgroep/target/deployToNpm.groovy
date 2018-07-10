@@ -24,14 +24,13 @@ node('java-1.8') {
         }
 
         stage('Build script with new version number'){
-            withNPM(npmrcConfig: 'NpmJsConfigFile') {
-                sh 'npm whoami'
                 sh 'npm run jenkins-build'
-            }
         }
 
         stage('Push new version to NPM'){
-            //todo
+            withNPM(npmrcConfig: 'NpmJsConfigFile') {
+               // sh 'npm publish --access public'
+            }
         }
 
         stage('Push new version to GitHub'){
