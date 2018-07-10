@@ -24,6 +24,7 @@ node('java-1.8') {
         }
 
         stage('Build script with new version number'){
+            sh 'npm whoami'
             sh 'npm run jenkins-build'
         }
 
@@ -48,7 +49,7 @@ node('java-1.8') {
     } finally {
 
         stage('Wipe workspace'){
-            deleteDir()
+            //deleteDir()
         }
 
     }
