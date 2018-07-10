@@ -15,7 +15,7 @@ node('java-1.8') {
     try {
 
         stage('Install dependencies'){
-            sh 'npm i'
+           sh 'npm i'
         }
 
         stage('Bump version'){
@@ -24,8 +24,10 @@ node('java-1.8') {
         }
 
         stage('Build script with new version number'){
-            sh 'npm whoami'
-            sh 'npm run jenkins-build'
+            withNPM(npmrcConfig: 'NpmJsConfigFile') {
+                sh 'npm whoami'
+                sh 'npm run jenkins-build'
+            }
         }
 
         stage('Push new version to NPM'){
