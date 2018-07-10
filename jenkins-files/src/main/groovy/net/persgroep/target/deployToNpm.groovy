@@ -20,7 +20,7 @@ node('java-1.8') {
 
         stage('Bump version'){
             println("chosen semver type:" + env.VersionBump)
-            sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump +' version: %s"'
+            //sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump +' version: %s"'
         }
 
         stage('Build script with new version number'){
@@ -32,8 +32,8 @@ node('java-1.8') {
         }
 
         stage('Push new version to GitHub'){
-            general.runGitCommand('git push origin ' + env.Branch)
-            general.runGitCommand('git push origin --tags')
+            //general.runGitCommand('git push origin ' + env.Branch)
+            //general.runGitCommand('git push origin --tags')
         }
 
 
