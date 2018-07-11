@@ -1,9 +1,14 @@
 {
-  "name": "@depersgroep/dfp-web-advertising",
+  "name": "dfp-web-advertising",
   "version": "4.0.3",
   "description": "DFP web Library",
   "main": "gulpfile.js",
-  "author": "Tar.get()",
+  "author": "Tar.get() Squad",
+  "license": "Apache-2.0",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/depersgroep/dfp-web-advertising.git"
+  },
   "scripts": {
     "prestart": "npm i",
     "start": "gulp",
