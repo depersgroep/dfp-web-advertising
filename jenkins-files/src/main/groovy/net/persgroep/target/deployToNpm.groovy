@@ -15,7 +15,7 @@ node('java-1.8') {
     try {
 
         stage('Install dependencies'){
-            sh 'npm clear cache --force'
+            sh 'npm cache clean --force'
             sh 'npm i'
         }
 
