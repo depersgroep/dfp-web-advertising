@@ -1,0 +1,7 @@
+# exclude all files, and the gulpfile
+*
+gulpfile.js
+
+# include dist folder, md files
+!dist/*
+!*.md

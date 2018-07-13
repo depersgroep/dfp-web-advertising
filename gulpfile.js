@@ -112,9 +112,9 @@ gulp.task('default', ['hook', 'clean'], function() {
 });
 
 // deploy task
-gulp.task('deploy', function() {
+gulp.task('deploy',['hook', 'clean'], function() {
 	// pay attention when upgrading gulp: https://github.com/gulpjs/gulp/issues/505#issuecomment-45379280
-	gulp.start('jsbuild');
+	gulp.start('js');
 });
 
 // pre-commit
