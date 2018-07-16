@@ -64,12 +64,22 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 				var callbacks = {
 					'resize': jasmine.createSpy('spy'),
 					'orientation': jasmine.createSpy('spy')
-				};
+				}, resize, orientationChange;
 
 				window.dfp.__testonly__.setEventListeners(callbacks, {});
 
-				window.dispatchEvent(new Event('resize'));
-				window.dispatchEvent(new Event('orientationchange'));
+				if(typeof(Event) === 'function') {
+					resize = new Event('resize');
+					orientationChange = new Event('orientationChange');
+				}else{
+					resize = document.createEvent('Event');
+					resize.initEvent('resize', true, true);
+					orientationChange = document.createEvent('Event');
+					orientationChange.initEvent('orientationChange', true, true);
+				}
+
+				window.dispatchEvent(resize);
+				window.dispatchEvent(orientationChange);
 
 				expect(callbacks.resize).toHaveBeenCalledWith(true);
 				expect(callbacks.orientation).toHaveBeenCalledWith(true);
