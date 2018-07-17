@@ -1,7 +1,7 @@
 module.exports = function(config) {
 	config.set({
 		browsers: ['Chrome'],
-		frameworks: ['jasmine'],
+		frameworks: ['jasmine', 'viewport'],
 		files: [
 			'src/object.keys-polyfill.js',
 			'src/dfp-async-helpers.js',

@@ -70,12 +70,12 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 
 				if(typeof(Event) === 'function') {
 					resize = new Event('resize');
-					orientationChange = new Event('orientationChange');
+					orientationChange = new Event('orientationchange');
 				}else{
 					resize = document.createEvent('Event');
 					resize.initEvent('resize', true, true);
 					orientationChange = document.createEvent('Event');
-					orientationChange.initEvent('orientationChange', true, true);
+					orientationChange.initEvent('orientationchange', true, true);
 				}
 
 				window.dispatchEvent(resize);
