@@ -41,9 +41,6 @@ Let's start by adding the following script in your `<head>`
 </script>
 
 <script src="https://www.googletagservices.com/tag/js/gpt.js" async="true"></script>
-
-<script src="../dist/dfp-krux.js"></script>
-<script src="../dist/dfp-helpers.js"></script>
 <script src="../dist/dfp.js" async="true"></script>
 ````
 
@@ -75,7 +72,7 @@ dfp.cmd.push(function() {
 ````
 
 ### Options
-* Optional
+Optional *
 
 #### tag.networkId
 _**1111:**_ Your Googletag networkId
@@ -87,36 +84,36 @@ This pattern is an example of how we organize our adUnits. Make sure that **%scr
 Example: `example/example.site-%screenSize%/default`
 
 #### async *
-Default **true**
+Default: **true**
 
 **true**: Enables async rendering mode to enable non-blocking fetching and rendering of ads.
 
 #### singleRequest *
-Default **true**
+Default: **true**
 
 **true**: Enables single request mode for fetching multiple ads at the same time.
 
 #### collapseEmpty *
-Default **true**
+Default: **true**
 
 **true**: Enables collapsing of slot divs so that they don't take up any space on the page when there is no ad content to display.
 
 #### disableInitialLoad *
-Default **false**
+Default: **false**
 
 **true**: Disables requests for ads on page load, which enables lazy loading.
 
 #### requestNonPersonalizedAds *
-Default **1**
+Default: **1**
 
 **0**: Enables personalized ads.
 
 #### ppid *
-Default **false**
+Default: **false**
 
 The Publisher provided identifier (PPID) allows publishers to send DoubleClick for Publishers an identifier for use in frequency capping, audience segmentation and targeting, sequential ad rotation and other audience-based ad delivery controls across devices.
 
-#### breakPoints
+#### breakpoints
 Array of breakpoints, whenever a resize event is fired a recalculation is triggered to hide slots on predesignated breakpoints.
 
 _Example_
@@ -192,46 +189,46 @@ targeting = {
 ### Slots
 Each slot contains the following properties:
 
-_**domId:**_html elements ID or data-id attribute
+**domId:** html elements ID or data-id attribute
 
-_**sizes:**_Available slots sizes [width, height] for each breakpoint
+**sizes:** Available slots sizes [width, height] for each breakpoint
 
-_**targeting:**_local slot targeting key/values
+**targeting:** local slot targeting key/values
 
 _Example_
 
 ````javascript
 slots = [
     {
-        'domId': 'leader--1',
+        'domId': 'leader',
         'sizes': {
             'large': [[970, 250]],
             'medium': [[970, 250]],
             'small': [[970, 250]]
         },
         'targeting': {
-            'pos': 'leader1'
+            'pos': 'leader'
         }
 
     }, {
-        'domId': 'sky--1',
+        'domId': 'sky',
         'sizes': {
             'large': [[300, 600]],
             'medium': [[300, 600]],
             'small': [[300, 600]]
         },
         'targeting': {
-            'pos': 'sky1'
+            'pos': 'sky'
         }
     }, {
-        'domId': 'imu--1',
+        'domId': 'imu',
         'sizes': {
             'large': [[300, 250], [320, 100]],
             'medium': [[320, 250],
             'small': []
         },
         'targeting': {
-            'pos': 'imu1'
+            'pos': 'imu'
         }
     }
 ]
@@ -243,10 +240,10 @@ Call `dfp.loadSlot()` within the `dfp.cmd.push()` function and pass along the re
 If there is only one slot for the same AD-type, pass the DOM id as first parameter
 
 ````javascript
-<div id="leader--1" class="dfp">
+<div id="leader" class="dfp">
     <script>
            dfp.cmd.push(function() {
-               dfp.loadSlot('leader--1', {
+               dfp.loadSlot('leader', {
                    'breakpoints': {
                        'large': true,
                        'medium': false,
@@ -263,7 +260,7 @@ and add data-id attribute containing the id used in the init configuration
 (ex: if slots should be displayed on different places for different sizes)
 
 ````javascript
-<div class="dfp fjs-leaderboard-1" data-id="leader--1"></div>
+<div class="dfp fjs-leaderboard-1" data-id="leader"></div>
 <script>
    dfp.cmd.push(function() {
        var elm = document.querySelector('.fjs-leaderboard-1');
@@ -277,7 +274,7 @@ and add data-id attribute containing the id used in the init configuration
    })
 </script>
 
-<div class="dfp fjs-leaderboard-2" data-id="leader--1"></div>
+<div class="dfp fjs-leaderboard-2" data-id="leader"></div>
 <script>
    dfp.cmd.push(function() {
        var elm = document.querySelector('.fjs-leaderboard-2');
@@ -296,11 +293,11 @@ To make use of the lazyload-feature make sure you include the `dfp-helpers.js` f
 
 ````javascript
 <script>
-    var elemImu1 = document.getElementById("imu--1");
+    var elemImu1 = document.getElementById('imu--1');
 
     window.lazyload(elemImu1, function() {
         dfp.cmd.push(function() {
-            dfp.loadSlot('imu--1', {
+            dfp.loadSlot('imu', {
                 'breakpoints': {
                     'large': true,
                     'medium': true,
