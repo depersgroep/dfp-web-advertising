@@ -73,48 +73,55 @@ dfp.cmd.push(function() {
 
 ### Options
 
-#### tag.networkId [required]
-_**1111:**_ Your Googletag networkId
+#### tag.networkId [required]:
+_**1111:**_
+Your Googletag networkId
 
-#### tag.adUnit [required]
+#### tag.adUnit [required]:
 [adunit-name]/[adunit-name].site-%screenSize%/[category]
 This pattern is an example of how we organize our adUnits. Make sure that **%screenSize%** is included in the adUnit.
 
 Example: `example/example.site-%screenSize%/default`
 
-#### async [optional]
+#### async [optional]:
 Default: **true**
 
-**true**: Enables async rendering mode to enable non-blocking fetching and rendering of ads.
+_**true:**_
+Enables async rendering mode to enable non-blocking fetching and rendering of ads.
 
-#### singleRequest [optional]
+#### singleRequest [optional]:
 Default: **true**
 
-**true**: Enables single request mode for fetching multiple ads at the same time.
+_**true:**_
+Enables single request mode for fetching multiple ads at the same time.
 
-#### collapseEmpty [optional]
+#### collapseEmpty [optional]:
 Default: **true**
 
-**true**: Enables collapsing of slot divs so that they don't take up any space on the page when there is no ad content to display.
+_**true:**_
+Enables collapsing of slot divs so that they don't take up any space on the page when there is no ad content to display.
 
-#### disableInitialLoad [optional]
+#### disableInitialLoad [optional]:
 Default: **false**
 
-**false**: Enables requests for ads on page load
+_**false:**_
+Enables requests for ads on page load
 
-**true**: Disables requests for ads on page load, which enables lazy loading.
+_**true:**_
+Disables requests for ads on page load, which enables lazy loading.
 
-#### requestNonPersonalizedAds [optional]
+#### requestNonPersonalizedAds [optional]:
 Default: **1**
 
-**1**: Disables personalized ads.
+_**1:**_
+Disables personalized ads.
 
-#### ppid [optional]
+#### ppid [optional]:
 Default: **false**
 
 The Publisher provided identifier (PPID) allows publishers to send DoubleClick for Publishers an identifier for use in frequency capping, audience segmentation and targeting, sequential ad rotation and other audience-based ad delivery controls across devices.
 
-#### breakpoints [required]
+#### breakpoints [required]:
 Array of breakpoints, whenever a resize event is fired a recalculation is triggered to hide slots on predesignated breakpoints.
 
 _Example_
@@ -135,7 +142,7 @@ _Example_
 }]
 ```
 
-#### Callbacks [required]
+#### Callbacks [required]:
 You can use existing callbacks which are triggered at certain key points during the script execution.
 
 _**renderEnded:**_
@@ -190,11 +197,14 @@ targeting = {
 ### Slots
 Each slot contains the following properties:
 
-**domId:** html elements ID or data-id attribute
+_**domId:**_
+html elements ID or data-id attribute
 
-**sizes:** Available slots sizes [width, height] for each breakpoint
+_**sizes:**_
+Available slots sizes [width, height] for each breakpoint
 
-**targeting:** local slot targeting key/values
+_**targeting:**_
+local slot targeting key/values
 
 _Example_
 
