@@ -34,7 +34,7 @@ Our script can be loaded synchronously as well as asynchronously. For best pract
 
 Let's start by adding the following script in your `<head>`
 
-```javascript
+```html
 <script>
     var dfp = dfp || {};
     dfp.cmd = dfp.cmd || [];
@@ -260,7 +260,7 @@ If there are multiple slots with the same ADslot-id, pass the DOM element as fir
 and add data-id attribute containing the id used in the init configuration
 (ex: if slots should be displayed on different places for different sizes)
 
-```javascript
+```html
 <div class="dfp fjs-leaderboard-1" data-id="leader"></div>
 <script>
    dfp.cmd.push(function() {
@@ -292,7 +292,7 @@ and add data-id attribute containing the id used in the init configuration
 
 To make use of the lazyload-feature make sure you include the `dfp-helpers.js` file and put your **loadSlot** within the **lazyload** function. The callback will be executed after attaining the set threshold (in pixel) below the viewport. The threshold is configurable by changing the **window.lazyloadthreshold** value.
 
-```javascript
+```html
 <script>
     var elemImu1 = document.getElementById('imu');
 
