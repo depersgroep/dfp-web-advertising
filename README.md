@@ -110,6 +110,8 @@ Enables requests for ads on page load
 _**true:**_
 Disables requests for ads on page load, which enables lazy loading.
 
+_Be advised that you won't be able to use 'Master & companion' with **disableInitialLoad** in combination with **single request**_
+
 #### requestNonPersonalizedAds [optional]:
 Default: **1**
 
