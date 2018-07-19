@@ -13,7 +13,7 @@ describe('testing the loadslots method', function() {
 				'end': 767
 			}];
 
-			window.self.innerWidth = 400;
+			viewport.set(400);
 
 			options = {
 				'breakpoints': breakpoints,
@@ -49,7 +49,7 @@ describe('testing the loadslots method', function() {
 					'end': 767
 				}];
 
-				window.self.innerWidth = 400;
+				viewport.set(400);
 
 				options = {
 					'breakpoints': breakpoints,
@@ -128,7 +128,7 @@ describe('testing the loadslots method', function() {
 				'end': 767
 			}];
 
-			window.self.innerWidth = 400;
+			viewport.set(400);
 
 			options = {
 				'breakpoints': breakpoints,
@@ -158,7 +158,7 @@ describe('testing the loadslots method', function() {
 			'end': 767
 		}];
 
-		window.self.innerWidth = 400;
+		viewport.set(400);
 
 		options = {
 			'breakpoints': breakpoints,

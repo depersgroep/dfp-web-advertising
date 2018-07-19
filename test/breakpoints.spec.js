@@ -14,7 +14,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 200
 					}];
 
-				window.self.innerWidth = 1;
+				viewport.set(1);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBeNull();
 			});
@@ -36,7 +36,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 					'end': 1200
 				}];
 
-				window.self.innerWidth = 1;
+				viewport.set(1);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBeNull();
 			});
@@ -51,7 +51,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 200
 					}];
 
-				window.self.innerWidth = 101;
+				viewport.set(101);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(breakpointName);
 			});
@@ -66,7 +66,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 200
 					}];
 
-				window.self.innerWidth = 100;
+				viewport.set(100);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(breakpointName);
 			});
@@ -81,7 +81,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 200
 					}];
 
-				window.self.innerWidth = 200;
+				viewport.set(200);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(breakpointName);
 			});
@@ -96,7 +96,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 200
 					}];
 
-				window.self.innerWidth = 201;
+				viewport.set(201);
 
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBeNull();
 			});
@@ -112,7 +112,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 							'end': 200
 						}];
 
-					window.self.innerWidth = 100;
+					viewport.set(100);
 
 					expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(breakpointName);
 				});
@@ -127,7 +127,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 							'end': 200
 						}];
 
-					window.self.innerWidth = 300;
+					viewport.set(300);
 
 					expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBeNull();
 				});
@@ -144,7 +144,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 							'end': Infinity
 						}];
 
-					window.self.innerWidth = 150;
+					viewport.set(150);
 
 					expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(breakpointName);
 				});
@@ -159,7 +159,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 							'end': Infinity
 						}];
 
-					window.self.innerWidth = 50;
+					viewport.set(50);
 
 					expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBeNull();
 				});
@@ -183,7 +183,7 @@ describe('TESTING NEW EXPLICIT BREAKPOINT DEFINITION', function() {
 						'end': 400
 					}];
 
-				window.self.innerWidth = 250;
+				viewport.set(250);
 				expect(window.dfp.__testonly__.resolveBreakpointName(breakpoints)).toBe(expectedBreakpointName);
 			});
 		});

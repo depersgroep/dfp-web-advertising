@@ -44,16 +44,25 @@ module.exports = function(config) {
 				os: 'OS X',
 				os_version: 'High Sierra',
 				name: 'OSX High Sierra Safari 11.1'
+			},
+			bs_win10_FireFox: {
+				base: 'BrowserStack',
+				browser: 'Firefox',
+				browser_version: '60.0',
+				os: 'Windows',
+				os_version: '10',
+				name: 'Windows 10 FireFox 60.0'
 			}
 		},
 
 		browsers: [	'bs_win10_Chrome',
 					'bs_OSX_HighSierra_Safari',
 					'bs_win10_IE11',
-					'bs_win10_Edge'
+					'bs_win10_Edge',
+					'bs_win10_FireFox'
 		],
 
-		frameworks: ['jasmine'],
+		frameworks: ['jasmine', 'viewport'],
 		files: [
 			'src/object.keys-polyfill.js',
 			'src/dfp-async-helpers.js',
@@ -74,7 +83,7 @@ module.exports = function(config) {
 
 		// optionally, configure the reporter
 		coverageReporter: {
-			type : 'html',
+			type : 'cobertura',
 			dir : 'coverage/'
 		}
 	});
