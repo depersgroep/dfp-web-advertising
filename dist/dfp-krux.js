@@ -5,10 +5,8 @@ window.dfpKrux = (function() {
 		var returnValue = '',
 			cookieArr;
 
-		key = 'kxdepersgroep_' + key;
-
-		if (window.localStorage) {
-			returnValue = window.localStorage[key] || '';
+		if (window.localStorage && window.localStorage[key]) {
+			returnValue = window.localStorage[key];
 		} else if (navigator.cookieEnabled) {
 			cookieArr = document.cookie.match(key + '=([^;]*)');
 			returnValue = cookieArr === null ? '' : cookieArr[1];
@@ -18,11 +16,11 @@ window.dfpKrux = (function() {
 	}
 
 	return {
-		'getUserId': function() {
-			return _retrieve('kuid');
+		'getUserId': function(key) {
+			return _retrieve(key + '_kuid');
 		},
-		'getSegments': function() {
-			var segs = _retrieve('segs');
+		'getSegments': function(key) {
+			var segs = _retrieve(key + '_segs');
 
 			return segs === '' ? [] : decodeURIComponent(segs).split(',');
 		}
