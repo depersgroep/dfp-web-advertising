@@ -45,61 +45,12 @@ window.dfp = (function(tar, w, d, c) {
 	 * @param {Object} targeting Global targeting parameters
 	 * @param {Object} slts Predefined slots
 	 */
-	tar.init = function(opts, targeting, slts) {
-		w.googletag = w.googletag || {};
-		w.googletag.cmd = w.googletag.cmd || [];
-
-		urlParameters = _getParameters(w.location.search);
-
-		_addPerformanceMark('dfp-init-begin');
-
-		tag = opts.tag || {};
-
-		_validateSetup();
-
-		slots = slts;
-		breakpointName = _resolveBreakpointName(opts.breakpoints);
-
-		if (breakpointName !== null) {
-			w.googletag.cmd.push(function() {
-				if (typeof opts.async === 'undefined' || opts.async) {
-					w.googletag.pubads().enableAsyncRendering();
-				}
-
-				if (typeof opts.singleRequest === 'undefined' || opts.singleRequest) {
-					w.googletag.pubads().enableSingleRequest();
-				}
-
-				if (typeof opts.collapseEmpty === 'undefined' || opts.collapseEmpty) {
-					w.googletag.pubads().collapseEmptyDivs();
-				}
-
-				if (typeof opts.requestNonPersonalizedAds !== 'undefined') {
-					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
-				}
-
-				if (opts.ppid && _isValidPpid(opts.ppid)) {
-					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
-				}
-
-				if (opts.disableInitialLoad) {
-					w.googletag.pubads().disableInitialLoad();
-					disableInitialLoad = true;
-				}
-
-				w.googletag.pubads().setRequestNonPersonalizedAds(nonPersonalizedAds);
-
-				_setGlobalTargeting(targeting);
-				_defineSlots(slots);
-
-				if (typeof opts.callbacks !== 'undefined') {
-					_setEventListeners(opts.callbacks, opts.breakpoints);
-				}
-
-				w.googletag.enableServices();
-			});
+	tar.init = function(opts, targeting, slts, scripts, cb) {
+		if (scripts instanceof Array && scripts.length > 0) {
+			_loadScripts(opts, targeting, slts, scripts, cb);
+		} else {
+			_init(opts, targeting, slts);
 		}
-		_addPerformanceMark('dfp-init-end');
 	};
 
 	/**
@@ -205,6 +156,95 @@ window.dfp = (function(tar, w, d, c) {
 			});
 		}
 	};
+
+	function _loadScripts(opts, targeting, slts, scripts, cb) {
+		var countScripts = scripts.length,
+			countScriptsLoaded = 0,
+			i = 0;
+
+		for (i = 0; i < scripts.length; i++) {
+			loadScript(scripts[i]);
+		}
+
+		function loadScript(url) {
+			var script;
+
+			script = document.createElement('script');
+
+			script.type = 'text/javascript';
+			script.async = true;
+			script.onload = function() {
+				countScriptsLoaded++;
+
+				if (countScriptsLoaded === countScripts) {
+					cb.call();
+					c.log(opts, targeting, slts);
+					_init(opts, targeting, slts);
+				}
+			};
+
+			script.onerror = function() {
+				throw new Error('Script (' + url + ') failed to load');
+			};
+			script.src = url;
+			document.head.appendChild(script);
+		}
+	}
+
+	function _init(opts, targeting, slts) {
+		_addPerformanceMark('dfp-init-begin');
+
+		w.googletag = w.googletag || {};
+		w.googletag.cmd = w.googletag.cmd || [];
+
+		urlParameters = _getParameters(w.location.search);
+		breakpointName = _resolveBreakpointName(opts.breakpoints);
+		tag = opts.tag || {};
+		slots = slts;
+
+		_validateSetup();
+
+		if (breakpointName !== null) {
+			w.googletag.cmd.push(function() {
+				if (typeof opts.async === 'undefined' || opts.async) {
+					w.googletag.pubads().enableAsyncRendering();
+				}
+
+				if (typeof opts.singleRequest === 'undefined' || opts.singleRequest) {
+					w.googletag.pubads().enableSingleRequest();
+				}
+
+				if (typeof opts.collapseEmpty === 'undefined' || opts.collapseEmpty) {
+					w.googletag.pubads().collapseEmptyDivs();
+				}
+
+				if (typeof opts.requestNonPersonalizedAds !== 'undefined') {
+					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
+				}
+
+				if (opts.ppid && _isValidPpid(opts.ppid)) {
+					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
+				}
+
+				if (opts.disableInitialLoad) {
+					w.googletag.pubads().disableInitialLoad();
+					disableInitialLoad = true;
+				}
+
+				w.googletag.pubads().setRequestNonPersonalizedAds(nonPersonalizedAds);
+
+				_setGlobalTargeting(targeting);
+				_defineSlots(slots);
+
+				if (typeof opts.callbacks !== 'undefined') {
+					_setEventListeners(opts.callbacks, opts.breakpoints);
+				}
+
+				w.googletag.enableServices();
+			});
+		}
+		_addPerformanceMark('dfp-init-end');
+	}
 
 	/**
 	 * Load a defined slot based on breakpoint

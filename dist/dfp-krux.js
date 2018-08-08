@@ -7,8 +7,8 @@ window.dfpKrux = (function() {
 
 		key = 'kxdepersgroep_' + key;
 
-		if (window.localStorage) {
-			returnValue = window.localStorage[key] || '';
+		if (window.localStorage && window.localStorage[key]) {
+			returnValue = window.localStorage[key];
 		} else if (navigator.cookieEnabled) {
 			cookieArr = document.cookie.match(key + '=([^;]*)');
 			returnValue = cookieArr === null ? '' : cookieArr[1];
