@@ -67,7 +67,7 @@ window.dfp = (function(tar, w, d, c) {
 		slots,
 		urlParameters = {},
 		debugParameters = {},
-		version = '4.0.2',
+		version = '4.0.5-2',
 		nonPersonalizedAds = 1;
 
 	/**
