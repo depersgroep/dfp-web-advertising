@@ -21,7 +21,6 @@ var pkg = require('./package.json'),
 	concat = require('gulp-concat'),
 	eslint = require('gulp-eslint'),
 	header = require('gulp-header'),
-	notify = require('gulp-notify'),
 	plumber = require('gulp-plumber'),
 	shell = require('gulp-shell'),
 	sourcemaps = require('gulp-sourcemaps'),
@@ -94,11 +93,7 @@ gulp.task('jsbuild', function() {
 			.pipe(writeSourcemaps ? sourcemaps.write('maps') : gUtil.noop())
 			.pipe(writeSourcemaps ? gUtil.noop() : header('/* v' + pkg.version + ' */\n'))
 			.pipe(rename(o.file + '.min.js'))
-			.pipe(gulp.dest(o.dest))
-			.pipe(notify({
-				'message': 'JS: ' + o.file + ' build complete',
-				'onLast': true // otherwise the notify will be fired for each file in the pipe
-			}));
+			.pipe(gulp.dest(o.dest));
 	}));
 });
 
