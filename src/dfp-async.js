@@ -160,14 +160,12 @@ window.dfp = (function(tar, w, d, c) {
 	function _loadScripts(opts, targeting, slts, scripts, cb) {
 		var countScripts = scripts.length,
 			countScriptsLoaded = 0,
-			i = 0;
+			first = scripts.length ? scripts.shift() : null;
 
-		for (i = 0; i < scripts.length; i++) {
-			loadScript(scripts[i]);
-		}
+		loadScript(first);
 
 		function loadScript(url) {
-			var script;
+			var script, next = scripts.length ? scripts.shift() : null;
 
 			script = document.createElement('script');
 
@@ -175,6 +173,10 @@ window.dfp = (function(tar, w, d, c) {
 			script.async = true;
 			script.onload = function() {
 				countScriptsLoaded++;
+
+				if (next) {
+					loadScript(next);
+				}
 
 				if (countScriptsLoaded === countScripts) {
 					cb.call();
@@ -186,6 +188,7 @@ window.dfp = (function(tar, w, d, c) {
 			script.onerror = function() {
 				throw new Error('Script (' + url + ') failed to load');
 			};
+
 			script.src = url;
 			document.head.appendChild(script);
 		}
