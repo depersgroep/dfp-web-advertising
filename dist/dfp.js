@@ -649,9 +649,8 @@ window.dfp = (function(tar, w, d, c) {
 			slot = {};
 
 		for (; i < l; i++) {
-			slot = slots[i];
-
-			if (slot.domId === domId) {
+			if (slots[i] === domId) {
+				slot = slots[i];
 				break;
 			}
 		}
