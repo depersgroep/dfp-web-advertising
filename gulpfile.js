@@ -21,14 +21,12 @@ var pkg = require('./package.json'),
 	concat = require('gulp-concat'),
 	eslint = require('gulp-eslint'),
 	header = require('gulp-header'),
-	notify = require('gulp-notify'),
 	plumber = require('gulp-plumber'),
 	shell = require('gulp-shell'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
 	gUtil = require('gulp-util'),
 	rename = require('gulp-rename'),
-	karma = require('karma').Server,
 	replace = require('gulp-replace'),
 	stripCode = require('gulp-strip-code');
 
@@ -94,11 +92,7 @@ gulp.task('jsbuild', function() {
 			.pipe(writeSourcemaps ? sourcemaps.write('maps') : gUtil.noop())
 			.pipe(writeSourcemaps ? gUtil.noop() : header('/* v' + pkg.version + ' */\n'))
 			.pipe(rename(o.file + '.min.js'))
-			.pipe(gulp.dest(o.dest))
-			.pipe(notify({
-				'message': 'JS: ' + o.file + ' build complete',
-				'onLast': true // otherwise the notify will be fired for each file in the pipe
-			}));
+			.pipe(gulp.dest(o.dest));
 	}));
 });
 
@@ -112,7 +106,7 @@ gulp.task('default', ['hook', 'clean'], function() {
 });
 
 // deploy task
-gulp.task('deploy',['hook', 'clean'], function() {
+gulp.task('deploy', ['hook', 'clean'], function() {
 	// pay attention when upgrading gulp: https://github.com/gulpjs/gulp/issues/505#issuecomment-45379280
 	gulp.start('js');
 });

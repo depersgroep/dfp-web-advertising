@@ -555,11 +555,11 @@ window.dfp = (function(tar, w, d, c) {
 	function _initServices(optServices) {
 		var opt;
 
-		services = services || {};
+		services = optServices || {};
 
 		for (opt in defaultServices) {
-			if (Object.hasOwnProperty.call(defaultServices, opt) && !Object.hasOwnProperty.call(optServices, opt)) {
-				optServices[opt] = defaultServices[opt];
+			if (Object.hasOwnProperty.call(defaultServices, opt) && !Object.hasOwnProperty.call(services, opt)) {
+				services[opt] = defaultServices[opt];
 			}
 		}
 	}
