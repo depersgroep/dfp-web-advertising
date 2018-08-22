@@ -27,7 +27,6 @@ var pkg = require('./package.json'),
 	uglify = require('gulp-uglify'),
 	gUtil = require('gulp-util'),
 	rename = require('gulp-rename'),
-	karma = require('karma').Server,
 	replace = require('gulp-replace'),
 	stripCode = require('gulp-strip-code');
 
@@ -107,7 +106,7 @@ gulp.task('default', ['hook', 'clean'], function() {
 });
 
 // deploy task
-gulp.task('deploy',['hook', 'clean'], function() {
+gulp.task('deploy', ['hook', 'clean'], function() {
 	// pay attention when upgrading gulp: https://github.com/gulpjs/gulp/issues/505#issuecomment-45379280
 	gulp.start('js');
 });

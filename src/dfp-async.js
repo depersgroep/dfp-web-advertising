@@ -16,13 +16,20 @@
 window.dfp = (function(tar, w, d, c) {
 	var queueList = tar.cmd ? tar.cmd : [],
 		tag,
-		disableInitialLoad = false,
 		breakpointName,
 		slots,
 		urlParameters = {},
 		debugParameters = {},
 		version = '__VERSION__',
-		nonPersonalizedAds = 1;
+		services = {},
+		defaultServices = {
+			'async': true,
+			'singleRequest': true,
+			'collapseEmpty': true,
+			'requestNonPersonalizedAds': 1,
+			'ppid': false,
+			'disableInitialLoad': false
+		};
 
 	/**
 	 * Override window.dfp.cmd Array
@@ -56,38 +63,36 @@ window.dfp = (function(tar, w, d, c) {
 		tag = opts.tag || {};
 
 		_validateSetup();
+		_initServices(opts.services);
 
 		slots = slts;
 		breakpointName = _resolveBreakpointName(opts.breakpoints);
 
 		if (breakpointName !== null) {
 			w.googletag.cmd.push(function() {
-				if (typeof opts.async === 'undefined' || opts.async) {
+				if (services.async) {
 					w.googletag.pubads().enableAsyncRendering();
 				}
 
-				if (typeof opts.singleRequest === 'undefined' || opts.singleRequest) {
+				if (services.singleRequest) {
 					w.googletag.pubads().enableSingleRequest();
 				}
 
-				if (typeof opts.collapseEmpty === 'undefined' || opts.collapseEmpty) {
+				if (services.collapseEmpty) {
 					w.googletag.pubads().collapseEmptyDivs();
 				}
 
-				if (typeof opts.requestNonPersonalizedAds !== 'undefined') {
-					nonPersonalizedAds = opts.requestNonPersonalizedAds ? 1 : 0;
+				if (services.requestNonPersonalizedAds) {
+					w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds);
 				}
 
-				if (opts.ppid && _isValidPpid(opts.ppid)) {
-					w.googletag.pubads().setPublisherProvidedId(opts.ppid);
+				if (services.ppid && _isValidPpid(services.ppid)) {
+					w.googletag.pubads().setPublisherProvidedId(services.ppid);
 				}
 
-				if (opts.disableInitialLoad) {
+				if (services.disableInitialLoad) {
 					w.googletag.pubads().disableInitialLoad();
-					disableInitialLoad = true;
 				}
-
-				w.googletag.pubads().setRequestNonPersonalizedAds(nonPersonalizedAds);
 
 				_setGlobalTargeting(targeting);
 				_defineSlots(slots);
@@ -124,7 +129,7 @@ window.dfp = (function(tar, w, d, c) {
 			w.googletag.cmd.push(function() {
 				w.googletag.display(domId);
 
-				if (disableInitialLoad) {
+				if (services.disableInitialLoad) {
 					w.googletag.pubads().refresh([_findSlot(domId).gslot]);
 				}
 				_addPerformanceMark('dfp-load-' + domId);
@@ -237,7 +242,7 @@ window.dfp = (function(tar, w, d, c) {
 		}
 
 		targeting.screen = breakpointName;
-		targeting.targeted = !nonPersonalizedAds;
+		targeting.targeted = !services.requestNonPersonalizedAds;
 
 		_setTargeting(w.googletag.pubads(), targeting, true);
 	}
@@ -495,6 +500,21 @@ window.dfp = (function(tar, w, d, c) {
 			}
 		} else {
 			throw new Error('No valid set-up! Add a tag parameter to options object');
+		}
+	}
+
+	/**
+	 * Initialize option services
+	 */
+	function _initServices(optServices) {
+		var opt;
+
+		services = optServices || {};
+
+		for (opt in defaultServices) {
+			if (Object.hasOwnProperty.call(defaultServices, opt) && !Object.hasOwnProperty.call(services, opt)) {
+				services[opt] = defaultServices[opt];
+			}
 		}
 	}
 
