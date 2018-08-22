@@ -603,9 +603,8 @@ window.dfp = (function(tar, w, d, c) {
 			slot = {};
 
 		for (; i < l; i++) {
-			slot = slots[i];
-
-			if (slot.domId === domId) {
+			if (slots[i].domId === domId) {
+				slot = slots[i];
 				break;
 			}
 		}
@@ -685,14 +684,29 @@ window.dfp = (function(tar, w, d, c) {
 	tar.__testonly__.addEventListener = _addEventListener;
 	tar.__testonly__.validateSetup = _validateSetup;
 	tar.__testonly__.isValidBreakpoint = _isValidBreakpoint;
+	tar.__testonly__.isValidPpid = _isValidPpid;
 	tar.__testonly__.getParameters = _getParameters;
 	tar.__testonly__.resolveBreakpointName = _resolveBreakpointName;
 	tar.__testonly__.cleanAdUnit = _cleanAdUnit;
 	tar.__testonly__.findSlot = _findSlot;
 	tar.__testonly__.getWindowWidth = _getWindowWidth;
 	tar.__testonly__.setIdOnDomElement = _setIdOnDomElement;
+	tar.__testonly__.clearLocalTargeting = _clearLocalTargeting;
+	tar.__testonly__.getIdString = _getIdString;
 	tar.__testonly__.debugParameters = debugParameters;
 	tar.__testonly__.urlParameters = urlParameters;
+	tar.__testonly__.getSlots = function() {
+		return slots;
+	};
+	tar.__testonly__.setSlots = function(s) {
+		slots = s;
+	};
+	tar.__testonly__.setTag = function(t) {
+		tag = t;
+	};
+	tar.__testonly__.setBreakpointName = function(bp) {
+		breakpointName = bp;
+	};
 
 	/* end-test-block */
 

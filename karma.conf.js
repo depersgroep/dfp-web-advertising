@@ -7,6 +7,7 @@ module.exports = function(config) {
 			'src/dfp-async-helpers.js',
 			'src/dfp-krux.js',
 			'src/dfp-async.js',
+			'test/helpers/*.js',
 			'test/**/*.spec.js'
 		],
 		// coverage reporter generates the coverage
