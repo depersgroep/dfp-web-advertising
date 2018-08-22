@@ -66,7 +66,7 @@ window.dfp = (function(tar, w, d, c) {
 		slots,
 		urlParameters = {},
 		debugParameters = {},
-		version = '4.0.5-2',
+		version = '5.0.0',
 		services = {},
 		defaultServices = {
 			'async': true,
@@ -736,7 +736,6 @@ window.dfp = (function(tar, w, d, c) {
 	// Used by site
 	tar.loadLazySlot = _loadLazySlot;
 	tar.version = version;
-
 
 
 	while (queueList.length > 0) {
