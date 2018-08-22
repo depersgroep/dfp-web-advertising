@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## [5.0.0] - 2018-07-31
+### Changed
+- Changed Krux to include the full namespace upon retrieval of kuid or segs
+
 ## [4.0.3] - 2018-07-09
 ### Fixed
 - Targeted initialization
