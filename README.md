@@ -7,7 +7,7 @@ package.json
 
 ```javascript
 "dependencies": {
-  "dfp-web-advertising": "^4.0.0"
+  "dfp-web-advertising": "^5.0.0"
 }
 ```
 

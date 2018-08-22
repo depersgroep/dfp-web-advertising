@@ -649,7 +649,7 @@ window.dfp = (function(tar, w, d, c) {
 			slot = {};
 
 		for (; i < l; i++) {
-			if (slots[i] === domId) {
+			if (slots[i].domId === domId) {
 				slot = slots[i];
 				break;
 			}
@@ -716,6 +716,7 @@ window.dfp = (function(tar, w, d, c) {
 	// Used by site
 	tar.loadLazySlot = _loadLazySlot;
 	tar.version = version;
+
 
 
 	while (queueList.length > 0) {
