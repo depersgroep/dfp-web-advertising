@@ -66,7 +66,7 @@ window.dfp = (function(tar, w, d, c) {
 		slots,
 		urlParameters = {},
 		debugParameters = {},
-		version = '4.0.4-1',
+		version = '4.0.5-2',
 		services = {},
 		defaultServices = {
 			'async': true,
@@ -669,9 +669,8 @@ window.dfp = (function(tar, w, d, c) {
 			slot = {};
 
 		for (; i < l; i++) {
-			slot = slots[i];
-
-			if (slot.domId === domId) {
+			if (slots[i].domId === domId) {
+				slot = slots[i];
 				break;
 			}
 		}
@@ -737,6 +736,7 @@ window.dfp = (function(tar, w, d, c) {
 	// Used by site
 	tar.loadLazySlot = _loadLazySlot;
 	tar.version = version;
+
 
 
 	while (queueList.length > 0) {
