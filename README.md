@@ -321,3 +321,13 @@ To make use of the lazyload-feature make sure you include the `dfp-helpers.js` f
     })
 </script>
 ```
+
+##Krux
+In case you need to retrieve krux values, make sure you imported the krux-helper in your build and assign the values to your global targeting parameters:
+
+```javascript
+targeting = {
+    'kuid': dfpKrux.getUserId('_kxmedialaan'),
+    'segs': dfpKrux.getSegments('_kxmedialaan')
+}
+```
