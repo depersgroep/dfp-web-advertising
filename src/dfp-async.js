@@ -82,10 +82,6 @@ window.dfp = (function(tar, w, d, c) {
 					w.googletag.pubads().collapseEmptyDivs();
 				}
 
-				if (services.requestNonPersonalizedAds) {
-					w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds);
-				}
-
 				if (services.ppid && _isValidPpid(services.ppid)) {
 					w.googletag.pubads().setPublisherProvidedId(services.ppid);
 				}
@@ -93,6 +89,8 @@ window.dfp = (function(tar, w, d, c) {
 				if (services.disableInitialLoad) {
 					w.googletag.pubads().disableInitialLoad();
 				}
+
+				w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds);
 
 				_setGlobalTargeting(targeting);
 				_defineSlots(slots);
