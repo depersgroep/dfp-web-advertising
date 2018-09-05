@@ -136,7 +136,7 @@ window.dfp = (function(tar, w, d, c) {
 					w.googletag.pubads().disableInitialLoad();
 				}
 
-				w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds);
+				w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds ? 1 : 0);
 
 				_setGlobalTargeting(targeting);
 				_defineSlots(slots);
