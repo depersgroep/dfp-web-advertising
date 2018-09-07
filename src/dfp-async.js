@@ -507,6 +507,10 @@ window.dfp = (function(tar, w, d, c) {
 	function _initServices(optServices) {
 		var opt;
 
+		if (typeof optServices === 'undefined') {
+			c.warn('DFP - No services object found in the configuration');
+		}
+
 		services = optServices || {};
 
 		for (opt in defaultServices) {

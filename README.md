@@ -54,12 +54,14 @@ var opts = {
         networkId: 1111,
         adUnit: 'example/example.site-%screenSize%/default'
     },
-    'async': true,
-    'singleRequest': true,
-    'collapseEmpty': true,
-    'disableInitialLoad': false,
-    'ppid': '12hjDojdj2JHK32228FHKJBskMOI2ndnjndn',
-    'requestNonPersonalizedAds': 1,
+    'services': {
+        'async': true,
+        'singleRequest': true,
+        'collapseEmpty': true,
+        'disableInitialLoad': false,
+        'ppid': '12hjDojdj2JHK32228FHKJBskMOI2ndnjndn',
+        'requestNonPersonalizedAds': 1
+    },
     'breakpoints': [...],
     'callbacks': {...}
 },
