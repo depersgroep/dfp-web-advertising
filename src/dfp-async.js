@@ -209,25 +209,16 @@ window.dfp = (function(tar, w, d, c) {
 		}
 	};
 
-	/**
-	 * Load a defined slot based on breakpoint
-	 *
-	 * @alias dfp.loadLazySlot
-	 *
-	 * @param {any} slot String or object of known node element where the slot needs to be loaded
-	 * @param {Object} opts Breakpoint object
-	 */
-	function _loadLazySlot(slot, opts) {
+	tar.createNewSlot = function(slot, opts) {
 		if (_isValidBreakpoint(opts, breakpointName)) {
-			w.googletag.cmd.push(function() {
-				_defineSlot(slot);
+			_addPerformanceMark('dfp-create-' + slot.domId);
+			_defineSlot(slot);
 
-				w.googletag.display(slot.domId);
+			w.googletag.display(slot.domId);
 
-				_displayDebug(slot);
-			});
+			_displayDebug(slot);
 		}
-	}
+	};
 
 	/**
 	 * Set global targeting parameter
@@ -406,7 +397,7 @@ window.dfp = (function(tar, w, d, c) {
 				&& key !== 'orientation'
 				&& key !== 'init'
 				&& key !== 'loadSlot'
-				&& key !== 'loadLazySlot'
+				&& key !== 'createNewSlot'
 				&& key !== 'version') {
 				tar[key] = cbs[key];
 			}
@@ -690,7 +681,6 @@ window.dfp = (function(tar, w, d, c) {
 	}
 
 	// Used by site
-	tar.loadLazySlot = _loadLazySlot;
 	tar.version = version;
 
 	/* start-test-block */

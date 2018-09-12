@@ -1,7 +1,7 @@
 'use strict';
 describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 	describe('when a method is defined in the callbacks object', function() {
-		describe('and it is not one of the following methods : init, loadSlot, loadLazySlot, renderEnded, orientationChange, resize', function() {
+		describe('and it is not one of the following methods : init, loadSlot, createNewSlot, renderEnded, orientationChange, resize', function() {
 			it('it should be available on the dfp object', function() {
 				var callbacks = {
 					'testmethod': jasmine.createSpy('spy')
@@ -17,14 +17,14 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 			});
 		});
 
-		describe('and it is one of the following methods : init, loadSlot, loadLazySlot', function() {
+		describe('and it is one of the following methods : init, loadSlot, createNewSlot', function() {
 			it('these should not be overwritten on the dfp object', function() {
 				var callbacks, options;
 
 				callbacks = {
 					'init': jasmine.createSpy('spy'),
 					'loadSlot': jasmine.createSpy('spy'),
-					'loadLazySlot': jasmine.createSpy('spy')
+					'createNewSlot': jasmine.createSpy('spy')
 				};
 
 				options = {
@@ -40,7 +40,7 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 
 				spyOn(window.dfp, 'init').and.callThrough();
 				spyOn(window.dfp, 'loadSlot').and.callThrough();
-				spyOn(window.dfp, 'loadLazySlot').and.callThrough();
+				spyOn(window.dfp, 'createNewSlot').and.callThrough();
 
 				window.dfp.init(options, [], []);
 				expect(window.dfp.init).not.toBe(callbacks.init);
@@ -52,10 +52,10 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 				expect(callbacks.loadSlot).not.toHaveBeenCalled();
 				expect(window.dfp.loadSlot).toHaveBeenCalledWith('', {'breakpoints': {}});// eslint-disable-line object-curly-newline
 
-				window.dfp.loadLazySlot('', {'breakpoints': {}});// eslint-disable-line object-curly-newline
-				expect(window.dfp.loadLazySlot).not.toBe(callbacks.loadLazySlot);
-				expect(callbacks.loadLazySlot).not.toHaveBeenCalled();
-				expect(window.dfp.loadLazySlot).toHaveBeenCalledWith('', {'breakpoints': {}});// eslint-disable-line object-curly-newline
+				window.dfp.createNewSlot('', {'breakpoints': {}});// eslint-disable-line object-curly-newline
+				expect(window.dfp.createNewSlot).not.toBe(callbacks.createNewSlot);
+				expect(callbacks.createNewSlot).not.toHaveBeenCalled();
+				expect(window.dfp.createNewSlot).toHaveBeenCalledWith('', {'breakpoints': {}});// eslint-disable-line object-curly-newline
 			});
 		});
 
