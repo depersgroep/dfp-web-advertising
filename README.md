@@ -329,7 +329,7 @@ In case you need to retrieve krux values, make sure you imported the krux-helper
 
 ```javascript
 targeting = {
-    'kuid': dfpKrux.getUserId('_kxmedialaan'),
-    'segs': dfpKrux.getSegments('_kxmedialaan')
+    'kuid': dfpKrux.getUserId('kxmedialaan'),
+    'segs': dfpKrux.getSegments('kxmedialaan')
 }
 ```
