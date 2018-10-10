@@ -19,21 +19,18 @@ node('java-1.8') {
             sh 'npm i'
         }
 
-        stage('Bump version'){
-            println("chosen semver type:" + env.VersionBump)
-            sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump +' version: %s"'
-        }
-
-        stage('Build script with new version number'){
-                sh 'npm run jenkins-build'
-                sh 'git add .'
-                sh 'git commit -am "Build new version"'
-        }
-
-        stage('Push new version to NPM'){
-            withNPM(npmrcConfig: 'NpmJsConfigFile') {
-                sh 'npm publish --access public'
+        stage('Execute Tests'){
+            withCredentials([
+                    string(credentialsId: 'BROWSERSTACK_KEY', variable: 'BROWSERSTACK_KEY'),
+                    string(credentialsId: 'BROWSERSTACK_USR', variable: 'BROWSERSTACK_USR')
+            ]) {
+                sh 'npm run test-browserstack'
             }
+        }
+
+        stage('Bump version') {
+            println("chosen semver type:" + env.VersionBump)
+            sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump + ' version: %s"'
         }
 
         stage('Push new version to GitHub'){
@@ -41,6 +38,11 @@ node('java-1.8') {
             general.runGitCommand('git push origin --tags')
         }
 
+        stage('Push new version to NPM'){
+            withNPM(npmrcConfig: 'NpmJsConfigFile') {
+                sh 'npm publish --access public'
+            }
+        }
 
         general.hipChatNotifySuccessful()
 
@@ -51,6 +53,14 @@ node('java-1.8') {
         currentBuild.result = "FAILURE"
 
     } finally {
+
+        stage('Create XML reports'){
+            junit 'junitResults/*.xml'
+        }
+
+        stage('check coverage reports') {
+            cobertura coberturaReportFile: 'coverage/**/*.xml'
+        }
 
         stage('Wipe workspace'){
             deleteDir()
