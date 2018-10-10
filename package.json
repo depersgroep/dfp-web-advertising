@@ -14,7 +14,8 @@
     "start": "gulp",
     "jenkins-build": "gulp deploy",
     "test": "karma start",
-    "test-browserstack": "karma start karma_browserstack.conf.js"
+    "test-browserstack": "karma start karma_browserstack.conf.js",
+    "postversion": "npm run jenkins-build && git add . && git commit -am \"Build new version\" "
   },
   "clean": [
     "dist/"
