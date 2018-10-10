@@ -14,15 +14,23 @@ node('java-1.8') {
 
     try {
 
-        stage('Bump version') {
-            println("chosen semver type:" + env.VersionBump)
+        stage('Install dependencies'){
+            sh 'npm cache clean --force'
+            sh 'npm i'
+        }
 
+        stage('Execute Tests'){
             withCredentials([
                     string(credentialsId: 'BROWSERSTACK_KEY', variable: 'BROWSERSTACK_KEY'),
                     string(credentialsId: 'BROWSERSTACK_USR', variable: 'BROWSERSTACK_USR')
             ]) {
-                sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump + ' version: %s"'
+                sh 'npm run test-browserstack'
             }
+        }
+
+        stage('Bump version') {
+            println("chosen semver type:" + env.VersionBump)
+            sh 'npm version ' + env.VersionBump + ' -f -m "Bumped to a new ' + env.VersionBump + ' version: %s"'
         }
 
         stage('Push new version to GitHub'){
