@@ -333,3 +333,13 @@ targeting = {
     'segs': dfpKrux.getSegments('kxmedialaan')
 }
 ```
+
+##Localstorage helper
+If you need to retrieve common localstorage values and assign the values to your global targeting parameters:
+
+```javascript
+targeting = {
+    'foobar': dfp.getFromLocalstorage('key'),
+    'cxense': dfp.getArrayFromLocalstorage('CxSegments') // splits comma delimited value
+}
+```

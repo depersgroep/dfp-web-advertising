@@ -684,6 +684,28 @@ window.dfp = (function(tar, w, d, c) {
 	}
 
 	/**
+	 * Retrieve value from localstorage
+	 *
+	 * @param {string} key
+	 */
+	function _getFromLocalstorage(key) {
+		if (window.localStorage && window.localStorage[key]) {
+			return window.localStorage[key];
+		}
+	}
+
+	/**
+	 * Retrieve array from localstorage
+	 *
+	 * @param {string} key
+	 */
+	function _getArrayFromLocalStorage(key) {
+		if (_getFromLocalstorage(key)) {
+			return _getFromLocalstorage(key).split(',');
+		}
+	}
+
+	/**
 	 * Start invoking asynchronous functions
 	 */
 	function _next() {
@@ -693,6 +715,8 @@ window.dfp = (function(tar, w, d, c) {
 	// Used by site
 	tar.loadLazySlot = _loadLazySlot;
 	tar.version = version;
+	tar.getFromLocalstorage = _getFromLocalstorage;
+	tar.getArrayFromLocalStorage = _getArrayFromLocalStorage;
 
 	/* start-test-block */
 	tar.__testonly__ = {};
