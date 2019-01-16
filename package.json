@@ -39,10 +39,20 @@
       },
       {
         "src": [
-          "src/dfp-krux.js"
+		  "src/utils/storage.js",
+          "src/dmp/dfp-krux.js"
         ],
         "dest": "dist/",
         "file": "dfp-krux"
+      },
+      {
+        "src": [
+          "src/utils/storage.js",
+          "src/dmp/dfp-krux.js",
+          "src/dmp/dfp-cxense.js"
+        ],
+        "dest": "dist/",
+        "file": "dfp-dmp"
       }
     ],
     "hint": {
