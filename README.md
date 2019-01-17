@@ -330,7 +330,7 @@ In case you need to retrieve dmp (Krux or CXense) values from the localstorage, 
 ```javascript
 targeting = {
     'kuid': dfp.dmp.krux.getUserId('kxmedialaan_kuid'),
-	'segs': dfp.dmp.krux.getSegments('kxmedialaan_segs')
+	'segs': dfp.dmp.krux.getSegments('kxmedialaan_segs'),
 	'cxense': dfp.dmp.cxense.getSegments('CxSegments')
 }
 ```
