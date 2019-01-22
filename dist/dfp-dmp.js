@@ -16,6 +16,11 @@ function getFromLocalStorage(key) {
 }
 
 'use strict';
+
+window.dfp = window.dfp || {};
+window.dfp.dmp = window.dfp.dmp || {};
+
+'use strict';
 /* eslint-disable no-undef */
 /* eslint-disable no-multi-assign */
 

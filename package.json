@@ -48,6 +48,7 @@
 			{
 				"src": [
 					"src/utils/storage.js",
+					"src/dmp/dfp-dmp.js",
 					"src/dmp/dfp-krux.js",
 					"src/dmp/dfp-cxense.js"
 				],
