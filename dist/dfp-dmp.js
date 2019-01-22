@@ -43,7 +43,7 @@ window.dfp.dmp.krux = window.dfpKrux = (function() {
 window.dfp.dmp.cxense = (function() {
 	return {
 		'getSegments': function() {
-			var segs = getFromLocalStorage('CxSegments');
+			var segs = getFromLocalStorage('cxSegments');
 
 			return segs === '' ? [] : decodeURIComponent(segs).split(',');
 		}
