@@ -1,95 +1,107 @@
 {
-  "name": "dfp-web-advertising",
-  "version": "5.0.1",
-  "description": "DFP web Library",
-  "main": "gulpfile.js",
-  "author": "Tar.get() Squad",
-  "license": "Apache-2.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/depersgroep/dfp-web-advertising.git"
-  },
-  "scripts": {
-    "prestart": "npm i",
-    "start": "gulp",
-    "jenkins-build": "gulp deploy",
-    "test": "karma start",
-    "test-browserstack": "karma start karma_browserstack.conf.js",
-    "version": "npm run jenkins-build && git add ."
-  },
-  "clean": [
-    "dist/"
-  ],
-  "js": {
-    "files": [
-      {
-        "src": [
-          "src/object.keys-polyfill.js",
-          "src/dfp-async.js"
-        ],
-        "dest": "dist/",
-        "file": "dfp"
-      },
-      {
-        "src": [
-          "src/dfp-async-helpers.js"
-        ],
-        "dest": "dist/",
-        "file": "dfp-helpers"
-      },
-      {
-        "src": [
-          "src/dfp-krux.js"
-        ],
-        "dest": "dist/",
-        "file": "dfp-krux"
-      }
-    ],
-    "hint": {
-      "src": [
-        "src/**/*.js"
-      ]
-    },
-    "watch": [
-      "src/**/*.js",
-      "test/**/*.js"
-    ]
-  },
-  "git": {
-    "hooks": {
-      "precommit": {
-        "src": "scripts/.pre-commit",
-        "dest": ".git/hooks/pre-commit"
-      }
-    }
-  },
-  "devDependencies": {
-    "del": "^2.2.2",
-    "eslint": "^4.18.2",
-    "eslint-config-persgroep": "^2.0.0",
-    "event-stream": "^3.3.4",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-copy": "^0.0.2",
-    "gulp-eslint": "^4.0.2",
-    "gulp-header": "^1.8.8",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-shell": "^0.5.2",
-    "gulp-sourcemaps": "2.4.1",
-    "gulp-strip-code": "^0.1.4",
-    "gulp-uglify": "^2.0.0",
-    "gulp-util": "^3.0.7",
-    "jasmine-core": "^2.5.2",
-    "karma": "^2.0.4",
-    "karma-browserstack-launcher": "^1.3.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-edge-launcher": "^0.4.2",
-    "karma-ie-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-junit-reporter": "^1.2.0",
-    "karma-viewport": "^1.0.2"
-  }
+	"name": "dfp-web-advertising",
+	"version": "5.0.1",
+	"description": "DFP web Library",
+	"main": "gulpfile.js",
+	"author": "Tar.get() Squad",
+	"license": "Apache-2.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/depersgroep/dfp-web-advertising.git"
+	},
+	"scripts": {
+		"prestart": "npm i",
+		"start": "gulp",
+		"jenkins-build": "gulp deploy",
+		"test": "karma start",
+		"test-browserstack": "karma start karma_browserstack.conf.js",
+		"version": "npm run jenkins-build && git add ."
+	},
+	"clean": [
+		"dist/"
+	],
+	"js": {
+		"files": [
+			{
+				"src": [
+					"src/object.keys-polyfill.js",
+					"src/dfp-async.js"
+				],
+				"dest": "dist/",
+				"file": "dfp"
+			},
+			{
+				"src": [
+					"src/dfp-async-helpers.js"
+				],
+				"dest": "dist/",
+				"file": "dfp-helpers"
+			},
+			{
+				"src": [
+					"src/utils/storage.js",
+					"src/dmp/dfp-dmp.js",
+					"src/dmp/dfp-krux.js"
+				],
+				"dest": "dist/",
+				"file": "dfp-krux"
+			},
+			{
+				"src": [
+					"src/utils/storage.js",
+					"src/dmp/dfp-dmp.js",
+					"src/dmp/dfp-krux.js",
+					"src/dmp/dfp-cxense.js"
+				],
+				"dest": "dist/",
+				"file": "dfp-dmp"
+			}
+		],
+		"hint": {
+			"src": [
+				"src/**/*.js"
+			]
+		},
+		"watch": [
+			"src/**/*.js",
+			"test/**/*.js"
+		]
+	},
+	"git": {
+		"hooks": {
+			"precommit": {
+				"src": "scripts/.pre-commit",
+				"dest": ".git/hooks/pre-commit"
+			}
+		}
+	},
+	"devDependencies": {
+		"del": "^2.2.2",
+		"eslint": "^4.18.2",
+		"eslint-config-persgroep": "^2.0.0",
+		"event-stream": "^3.3.4",
+		"gulp": "^3.9.1",
+		"gulp-concat": "^2.6.0",
+		"gulp-copy": "^0.0.2",
+		"gulp-eslint": "^4.0.2",
+		"gulp-header": "^1.8.8",
+		"gulp-plumber": "^1.1.0",
+		"gulp-rename": "^1.2.2",
+		"gulp-replace": "^0.5.4",
+		"gulp-shell": "^0.5.2",
+		"gulp-sourcemaps": "2.4.1",
+		"gulp-strip-code": "^0.1.4",
+		"gulp-uglify": "^2.0.0",
+		"gulp-util": "^3.0.7",
+		"jasmine-core": "^2.5.2",
+		"karma": "^2.0.4",
+		"karma-browserstack-launcher": "^1.3.0",
+		"karma-chrome-launcher": "^2.0.0",
+		"karma-coverage": "^1.1.1",
+		"karma-edge-launcher": "^0.4.2",
+		"karma-ie-launcher": "^1.0.0",
+		"karma-jasmine": "^1.0.2",
+		"karma-junit-reporter": "^1.2.0",
+		"karma-viewport": "^1.0.2"
+	}
 }
