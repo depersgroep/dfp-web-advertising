@@ -16,13 +16,12 @@
 /* do NOT change the order of the pipes as this could cause unwanted effects */
 var pkg = require('./package.json'),
 	del = require('del'),
-	es = require('event-stream'),
+	merge = require('merge-stream'),
 	gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	eslint = require('gulp-eslint'),
 	header = require('gulp-header'),
 	plumber = require('gulp-plumber'),
-	shell = require('gulp-shell'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
 	gUtil = require('gulp-util'),
@@ -42,7 +41,7 @@ function getArgument(key) {
 }
 
 // clean folders
-gulp.task('clean', function(cb) {
+gulp.task('clean', function clean(cb) {
 	del(pkg.clean, {
 		'force': true
 	}).then(function() {
@@ -53,7 +52,7 @@ gulp.task('clean', function(cb) {
 });
 
 // Javascript
-gulp.task('eslint', function() {
+gulp.task('eslint', function eslinting() {
 	return gulp.src(pkg.js.hint.src)
 		.pipe(plumber({
 			'errorHandler': onError
@@ -63,15 +62,11 @@ gulp.task('eslint', function() {
 		.pipe(eslint.failAfterError());
 });
 
-gulp.task('js', ['eslint'], function() {
-	gulp.start('jsbuild');
-});
-
-gulp.task('jsbuild', function() {
+gulp.task('jsbuild', function jsbuild() {
 	var sourcemapsArg = getArgument('sourcemaps'),
 		writeSourcemaps = sourcemapsArg === 'true';
 
-	return es.merge(pkg.js.files.map(function(o) {
+	return merge(pkg.js.files.map(function(o) {
 		return gulp.src(o.src)
 			.pipe(plumber({
 				'errorHandler': onError
@@ -96,23 +91,20 @@ gulp.task('jsbuild', function() {
 	}));
 });
 
-// default task
-gulp.task('default', ['hook', 'clean'], function() {
-	// pay attention when upgrading gulp: https://github.com/gulpjs/gulp/issues/505#issuecomment-45379280
-	gulp.start('js');
-
-	// watch
-	gulp.watch(pkg.js.watch, ['js']);
-});
-
-// deploy task
-gulp.task('deploy', ['hook', 'clean'], function() {
-	// pay attention when upgrading gulp: https://github.com/gulpjs/gulp/issues/505#issuecomment-45379280
-	gulp.start('js');
-});
+gulp.task('js', gulp.series(['eslint', 'jsbuild']));
 
 // pre-commit
 // on Mac, make sure the folder exists
-gulp.task('hook', shell.task([
-	'cp ' + pkg.git.hooks.precommit.src + ' ' + pkg.git.hooks.precommit.dest
-]));
+gulp.task('hook', function hook() {
+	return gulp.src(pkg.git.hooks.src)
+		.pipe(gulp.dest(pkg.git.hooks.dest));
+});
+
+// default task
+gulp.task('default', gulp.series(['hook', 'clean', 'js'], function watch() {
+	// watch
+	gulp.watch(pkg.js.watch, gulp.series(['js']));
+}));
+
+// deploy task
+gulp.task('deploy', gulp.series(['hook', 'clean', 'js']));

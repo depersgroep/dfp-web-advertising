@@ -8,6 +8,7 @@
     ],
     "globals": {},
     "env": {
-        "browser": true
+        "browser": true,
+        "amd": true
     }
 }
