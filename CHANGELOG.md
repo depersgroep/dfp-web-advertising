@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
-## Coming up
-### Changed
+## [5.1.1] - 2019-06-17
+### Security
 - Updated dependencies to remove security vulnerabilities
 
 ## [5.1.0] - 2019-01-23
