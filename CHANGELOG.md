@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## Coming up
+### Changed
+- Updated dependencies to remove security vulnerabilities
+
+## [5.1.0] - 2019-01-23
+### Added
+- Added lazyLoadSlot to define & load a slot
+
 ## [5.0.0] - 2018-07-31
 ### Changed
 - Changed Krux to include the full namespace upon retrieval of kuid or segs
