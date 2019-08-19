@@ -146,7 +146,7 @@ _Example_
 }]
 ```
 
-#### Callbacks [required]:
+#### Callbacks [optional]:
 You can use existing callbacks which are triggered at certain key points during the script execution.
 
 _**renderEnded:**_
@@ -157,8 +157,6 @@ Fired on resize event
 
 _**orientation:**_
 Triggered on orientation change
-
-You can also create custom events which can easily be called from within any creative.
 
 _Example_
 
@@ -181,6 +179,31 @@ _Example_
     },
 }
 ```
+
+You can also create custom events which can easily be called from within any creative. These custom events should be called through postMessage on the top window and be composed as follow:
+
+ ````javascript
+<script>
+window.top.postMessage(JSON.stringify({
+    'type': 'dfpCallback',
+    'action': 'callbackFunctionName',
+    'options': {
+        // Anything
+    }
+}), '*');
+</script>
+ ````
+
+ _**type:**_
+The type should always be set to 'dfpCallback' so we can distinguish it from other messages.
+
+ _**action:**_
+Should have the same name as the callback function
+
+ _**options:**_
+This is the object passed to the function
+
+**Important:** the message is a JSON string, not an object.
 
 ### Targeting
 Sets custom targeting parameters for a given key that apply to all pubads service ad slots.
