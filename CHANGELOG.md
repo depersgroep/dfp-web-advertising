@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## [5.2.1] - 2019-08-21
+### Security
+- Updated dependencies to remove security vulnerabilities
+
+## [5.2.0] - 2019-08-21
+### Added
+- Added support for Safeframe creatives by allowing callbacks through postMessage
+
 ## [5.1.1] - 2019-06-17
 ### Security
 - Updated dependencies to remove security vulnerabilities
