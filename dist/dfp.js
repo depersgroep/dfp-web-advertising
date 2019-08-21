@@ -66,7 +66,7 @@ window.dfp = (function(tar, w, d, c) {
 		slots,
 		urlParameters = {},
 		debugParameters = {},
-		version = '5.1.1',
+		version = '5.2.0',
 		services = {},
 		defaultServices = {
 			'async': true,
