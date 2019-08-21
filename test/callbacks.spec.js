@@ -68,10 +68,10 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 
 				window.dfp.__testonly__.setEventListeners(callbacks, {});
 
-				if(typeof(Event) === 'function') {
+				if (typeof(Event) === 'function') {
 					resize = new Event('resize');
 					orientationChange = new Event('orientationchange');
-				}else{
+				} else {
 					resize = document.createEvent('Event');
 					resize.initEvent('resize', true, true);
 					orientationChange = document.createEvent('Event');
@@ -81,8 +81,8 @@ describe('TESTING DYNAMIC CALLBACK DEFINITION', function() {
 				window.dispatchEvent(resize);
 				window.dispatchEvent(orientationChange);
 
-				expect(callbacks.resize).toHaveBeenCalledWith(true);
-				expect(callbacks.orientation).toHaveBeenCalledWith(true);
+				expect(callbacks.resize).toHaveBeenCalled();
+				expect(callbacks.orientation).toHaveBeenCalled();
 			});
 		});
 	});
