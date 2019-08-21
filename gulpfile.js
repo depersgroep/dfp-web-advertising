@@ -24,20 +24,21 @@ var pkg = require('./package.json'),
 	plumber = require('gulp-plumber'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
-	gUtil = require('gulp-util'),
 	rename = require('gulp-rename'),
 	replace = require('gulp-replace'),
-	stripCode = require('gulp-strip-code');
+	stripCode = require('gulp-strip-code'),
+	colors = require('ansi-colors'),
+	yargs = require('yargs'),
+	gulpIf = require('gulp-if');
 
 // helper functions
 function onError(err) {
-	gUtil.log('\n', gUtil.colors.bold(gUtil.colors.red('Error ocurred: ') + err.message + ' @ ' + err.fileName + ':' + err.lineNumber), '\n');
-	gUtil.beep();
+	console.log('\n', colors.bold(colors.red('Error ocurred: ') + err.message + ' @ ' + err.fileName + ':' + err.lineNumber), '\n');
 	this.emit('end');
 }
 
 function getArgument(key) {
-	return gUtil.env[key] ? gUtil.env[key] : null;
+	return yargs.argv[key] ? yargs.argv[key] : null;
 }
 
 // clean folders
@@ -76,7 +77,7 @@ gulp.task('jsbuild', function jsbuild() {
 				'start_comment': 'start-test-block',
 				'end_comment': 'end-test-block'
 			}))
-			.pipe(writeSourcemaps ? sourcemaps.init() : gUtil.noop())
+			.pipe(gulpIf(writeSourcemaps, sourcemaps.init()))
 			.pipe(concat(o.file + '.js'))
 			.pipe(gulp.dest(o.dest))
 			.pipe(uglify({
@@ -84,8 +85,8 @@ gulp.task('jsbuild', function jsbuild() {
 					'hoist_funs': false // hoist function declarations - otherwise functions are alphabetized, which can cause errors
 				}
 			}))
-			.pipe(writeSourcemaps ? sourcemaps.write('maps') : gUtil.noop())
-			.pipe(writeSourcemaps ? gUtil.noop() : header('/* v' + pkg.version + ' */\n'))
+			.pipe(gulpIf(writeSourcemaps, sourcemaps.write('maps')))
+			.pipe(gulpIf(!writeSourcemaps, header('/* v' + pkg.version + ' */\n')))
 			.pipe(rename(o.file + '.min.js'))
 			.pipe(gulp.dest(o.dest));
 	}));

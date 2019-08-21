@@ -74,6 +74,7 @@
 		}
 	},
 	"devDependencies": {
+		"ansi-colors": "^4.1.1",
 		"del": "^5.0.0",
 		"eslint": "^6.2.0",
 		"eslint-config-persgroep": "^2.0.0",
@@ -82,13 +83,13 @@
 		"gulp-copy": "^4.0.1",
 		"gulp-eslint": "^6.0.0",
 		"gulp-header": "^2.0.9",
+		"gulp-if": "^3.0.0",
 		"gulp-plumber": "^1.2.1",
 		"gulp-rename": "^1.4.0",
 		"gulp-replace": "^1.0.0",
 		"gulp-sourcemaps": "^2.6.5",
 		"gulp-strip-code": "^0.1.4",
 		"gulp-uglify": "^3.0.2",
-		"gulp-util": "^3.0.7",
 		"jasmine-core": "^3.4.0",
 		"karma": "^4.2.0",
 		"karma-browserstack-launcher": "^1.5.1",
@@ -99,6 +100,7 @@
 		"karma-jasmine": "^2.0.1",
 		"karma-junit-reporter": "^1.2.0",
 		"karma-viewport": "^1.0.4",
-		"merge-stream": "^2.0.0"
+		"merge-stream": "^2.0.0",
+		"yargs": "^14.0.0"
 	}
 }
