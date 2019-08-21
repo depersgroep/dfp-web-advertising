@@ -138,6 +138,12 @@ window.dfp = (function(tar, w, d, c) {
 
 				w.googletag.pubads().setRequestNonPersonalizedAds(services.requestNonPersonalizedAds ? 1 : 0);
 
+				w.googletag.pubads().setSafeFrameConfig({
+					'allowOverlayExpansion': true,
+					'allowPushExpansion': true,
+					'sandbox': true
+				});
+
 				_setGlobalTargeting(targeting);
 				_defineSlots(slots);
 
@@ -417,11 +423,6 @@ window.dfp = (function(tar, w, d, c) {
 	 * @param {Object} breakpoints Breakpoints
 	 */
 	function _setEventListeners(cbs, breakpoints) {
-		var callbackFnKeys = Object.keys(cbs),
-			i = 0,
-			l = callbackFnKeys.length,
-			key;
-
 		if (typeof cbs.renderEnded === 'function') {
 			w.googletag.pubads().addEventListener('slotRenderEnded', function(e) {
 				_slotRenderEnded(e, cbs.renderEnded);
@@ -444,7 +445,20 @@ window.dfp = (function(tar, w, d, c) {
 			});
 		}
 
-		for (; i < l; i++) {
+		_setUnsafeCallbacks(cbs);
+		_setSafeframeCallbacks(cbs);
+	}
+
+	/**
+	 * Sets unsafe callbacks on container for legacy creative support
+	 *
+	 * @param {Object} cbs Callbacks
+	 */
+	function _setUnsafeCallbacks(cbs) {
+		var key, i,
+			callbackFnKeys = Object.keys(cbs);
+
+		for (i = 0; i < callbackFnKeys.length; i++) {
 			key = callbackFnKeys[i];
 
 			if (typeof cbs[key] === 'function'
@@ -458,6 +472,31 @@ window.dfp = (function(tar, w, d, c) {
 				tar[key] = cbs[key];
 			}
 		}
+	}
+
+	/**
+	 * Sets custom safeframe callbacks throught the postMessage event
+	 *
+	 * @param {Object} cbs Callbacks
+	 */
+	function _setSafeframeCallbacks(cbs) {
+		_addEventListener(w, 'message', function(e) {
+			var data = (function(raw) {
+				try {
+					return JSON.parse(raw);
+				} catch (err) {
+					return false;
+				}
+			}(e.data));
+
+			if (data && data.type === 'dfpCallback' && typeof data.action === 'string') {
+				if (Object.hasOwnProperty.call(cbs, data.action)) {
+					cbs[data.action].call(this, data.options);
+				} else {
+					c.warn('Callback "' + data.action + '" not found in configuration');
+				}
+			}
+		});
 	}
 
 	/**
