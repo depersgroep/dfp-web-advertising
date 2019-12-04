@@ -108,5 +108,6 @@ window.lazyload = (function() {
 			'element': elem,
 			'callback': cb
 		});
+		lazyLoad();
 	};
 }());

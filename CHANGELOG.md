@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## [5.2.2] - 2019-08-21
+### Fixed
+- Lazy loading can now load if it's on screen on load, without having to scroll.
+### Security
+- Updated dependencies to remove security vulnerabilities
+
 ## [5.2.1] - 2019-08-21
 ### Security
 - Updated dependencies to remove security vulnerabilities
