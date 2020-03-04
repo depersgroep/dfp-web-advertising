@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ####[Fixed] for any bug fixes.
 ####[Security] to invite users to upgrade in case of vulnerabilities.
 
+## [5.3.0] - 2020-03-04
+### Fixed
+- Lazy loading now doesn't trigger if the element (or its parents) is hidden (`display: none;` styling).
+
 ## [5.2.2] - 2019-12-04
 ### Fixed
 - Lazy loading can now load if it's on screen on load, without having to scroll.
