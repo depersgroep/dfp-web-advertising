@@ -62,16 +62,32 @@ window.lazyload = (function() {
 	}
 
 	function isInViewport(el) {
-		var rect = el.getBoundingClientRect(),
-			isInView = false;
+		var rect;
 
-		isInView =
-        rect.bottom >= 0 &&
-        rect.right >= 0 &&
-        rect.top - threshold <= screenHeight &&
-        rect.left <= screenWidth;
+		if (!el || !(el instanceof Element) || isHidden(el)) {
+			return false;
+		}
 
-		return isInView;
+		rect = el.getBoundingClientRect();
+
+		return rect.bottom >= 0 &&
+			rect.right >= 0 &&
+			rect.top - threshold <= screenHeight &&
+			rect.left <= screenWidth;
+	}
+
+	function isHidden(node) {
+		var el, style;
+
+		for (el = node; el; el = el.parentElement) {
+			style = getComputedStyle(el);
+
+			if (style.display === 'none') {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	function throttle(func, wait) {
