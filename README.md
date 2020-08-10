@@ -1,3 +1,5 @@
+> ⚠️ This script is no longer under development, and thus contains outdated dependencies. If you're part of DPG Media, contact Tar.get() Squad or Advertising Front Office area for the new implementation details. ⚠️
+
 # DFP implementation guide
 
 ## Installing our script 
